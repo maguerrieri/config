@@ -17,7 +17,7 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 
 # importing work, etc bash profiles
 OTHER_PROFILES=(
-	"../Externals/pg-config/profile/bash_profile"
+	"/Users/marioguerrieri/Dropbox (Pocket Gems)/tech/config/profile/bash_profile"
 	)
 for profile_file in "${OTHER_PROFILES[@]}"
 do
