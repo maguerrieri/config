@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?><coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"><dc:creator>Johannes Schindelin, msysgit Committers</dc:creator><dc:description>Git (for Windows) – Git is a powerful distributed Source Code Management tool. If you just want to use Git to do your version control in Windows, you will need to download Git for Windows, run the installer, and you are ready to start.
+
+Note: Git for Windows is a project run by volunteers, so if you want it to improve, volunteer!
+
+### Package Specifics
+The package uses default install options minus cheetah integration and desktop icons. Cheetah prevents a good upgrade scenario, so it has been removed.
+
+#### Package Parameters
+The following package parameters can be set:
+
+ * `/GitOnlyOnPath` - this puts gitinstall\cmd on path. This is also done by default if no package parameters are set.
+ * `/GitAndUnixToolsOnPath` - this puts gitinstall\bin on path. This setting will override `/GitOnlyOnPath`.
+ * `/NoAutoCrlf` - this setting only affects new installs, it will not override an existing `.gitconfig`. This will ensure 'Checkout as is, commit as is'
+
+These parameters can be passed to the installer with the use of `-params`.
+For example: `-params '"/GitAndUnixToolsOnPath /NoAutoCrlf"'`.</dc:description><dc:identifier>git.install</dc:identifier><version>2.8.1</version><keywords>git vcs dvcs version control msysgit admin</keywords><dc:title>Git (Install)</dc:title><lastModifiedBy>choco, Version=0.9.9.11, Culture=neutral, PublicKeyToken=79d02ea9cad655eb;Microsoft Windows NT 6.3.9600.0;.NET Framework 4</lastModifiedBy></coreProperties>

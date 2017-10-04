@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>build</key>
+	<real>701</real>
+	<key>license</key>
+	<string>5125-7659-5595-6227-5073</string>
+	<key>preferences</key>
+	<dict>
+		<key>Battery_MenubarMode</key>
+		<string></string>
+		<key>Battery_Notifications</key>
+		<array/>
+		<key>CPU_MenubarGroupItems</key>
+		<integer>0</integer>
+		<key>CPU_MenubarMode</key>
+		<string></string>
+		<key>CombinedDropdownDisplayMode</key>
+		<string>1,2,3,4,5</string>
+		<key>Diagnostics_Enabled</key>
+		<integer>1</integer>
+		<key>Diagnostics_Sent_3.3</key>
+		<true/>
+		<key>Disks_DropdownCombineActivity</key>
+		<integer>0</integer>
+		<key>Disks_DropdownDisplayMode</key>
+		<integer>2</integer>
+		<key>Disks_MenubarMode</key>
+		<string></string>
+		<key>Disks_SeperateFusion</key>
+		<integer>1</integer>
+		<key>Memory_MenubarMode</key>
+		<string></string>
+		<key>Network_MenubarMode</key>
+		<string></string>
+		<key>Sensors_MenubarMode</key>
+		<string></string>
+		<key>Sensors_TemperatureMode</key>
+		<integer>0</integer>
+		<key>StatusItems-Order</key>
+		<array>
+			<integer>8</integer>
+		</array>
+	</dict>
+	<key>version</key>
+	<real>5.3000001907348633</real>
+</dict>
+</plist>

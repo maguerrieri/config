@@ -1,0 +1,25 @@
+# aliases
+alias rmcf="find . -iname *conflicted* -delete"
+
+# tab completion
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# git prompt
+. /usr/local/etc/bash_completion.d/git-prompt.sh
+PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+
+# git aliases
+alias gsmcl="git submodule foreach --recursive \"find . -iname \"*conflicted*\" -delete; git reset --hard HEAD; find . -iname *conflicted* -delete\""
+alias gsmuir="git submodule update --init --recursive"
+
+# iTerm2 shell integration
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# importing work, etc bash profiles
+OTHER_PROFILES=(
+	"/Users/marioguerrieri/Dropbox (Pocket Gems)/tech/config/profile/bash_profile"
+	)
+for profile_file in "${OTHER_PROFILES[@]}"
+do
+	source "$profile_file"
+done
