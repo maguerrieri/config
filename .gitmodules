@@ -1,0 +1,3 @@
+[submodule "Externals/pg-config"]
+	path = Externals/pg-config
+	url = git@github.com:maguerrieri/pg-config.git
