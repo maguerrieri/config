@@ -1,4 +1,4 @@
-$PROFILES="$HOME/Dropbox (Pocket Gems)/tech/config/profile"
+PROFILES="$HOME/Dropbox (Pocket Gems)/tech/config/profile"
 
 # aliases
 alias rmcf="find . -iname *conflicted* -delete"
