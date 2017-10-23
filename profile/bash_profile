@@ -1,3 +1,5 @@
+$PROFILES="$HOME/Dropbox (Pocket Gems)/tech/config/profile"
+
 # aliases
 alias rmcf="find . -iname *conflicted* -delete"
 
@@ -17,7 +19,7 @@ test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_in
 
 # importing work, etc bash profiles
 OTHER_PROFILES=(
-	"$HOME/Dropbox (Pocket Gems)/tech/config/profile/bash_profile"
+	"$PROFILES/bash_profile"
 	)
 for profile_file in "${OTHER_PROFILES[@]}"
 do
