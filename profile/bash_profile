@@ -13,11 +13,11 @@ alias gsmcl="git submodule foreach --recursive \"find . -iname \"*conflicted*\" 
 alias gsmuir="git submodule update --init --recursive"
 
 # iTerm2 shell integration
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_integration.bash"
 
 # importing work, etc bash profiles
 OTHER_PROFILES=(
-	"/Users/marioguerrieri/Dropbox (Pocket Gems)/tech/config/profile/bash_profile"
+	"$HOME/Dropbox (Pocket Gems)/tech/config/profile/bash_profile"
 	)
 for profile_file in "${OTHER_PROFILES[@]}"
 do
