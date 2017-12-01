@@ -19,5 +19,6 @@
 	"editor.rulers": [
 		80
 	],
-	"python.pythonPath": "python2"
+	"python.pythonPath": "python2",
+	"git.confirmSync": false
 }
