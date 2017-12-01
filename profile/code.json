@@ -19,5 +19,5 @@
 	"editor.rulers": [
 		80
 	],
-	"workbench.iconTheme": "vscode-icons"
+	"python.pythonPath": "python2"
 }

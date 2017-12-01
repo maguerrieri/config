@@ -2,6 +2,7 @@ PROFILES="$HOME/Dropbox (Pocket Gems)/tech/config/profile"
 
 # aliases
 alias rmcf="find . -iname *conflicted* -delete"
+alias pip="pip2"
 
 # tab completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
@@ -11,8 +12,15 @@ alias rmcf="find . -iname *conflicted* -delete"
 PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
 
 # git aliases
-alias gsmcl="git submodule foreach --recursive \"find . -iname \"*conflicted*\" -delete; git reset --hard HEAD; find . -iname *conflicted* -delete\""
+alias gsmcl="git submodule foreach --recursive \"git reset --hard HEAD\"; find . -iname *conflicted* -delete"
 alias gsmuir="git submodule update --init --recursive"
+function gcl {
+	rm -rf $(git status -s)
+	git reset --hard HEAD
+	gsmcl
+	gsmuir
+}
+export -f gcl
 
 # iTerm2 shell integration
 test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_integration.bash"
