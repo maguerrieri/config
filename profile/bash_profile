@@ -7,9 +7,18 @@ alias pip="pip2"
 # tab completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
-# git prompt
+# prompt
 . /usr/local/etc/bash_completion.d/git-prompt.sh
-PROMPT_COMMAND='__git_ps1 "\u@\h:\w" "\\\$ "'
+
+bold='\['`tput bold`'\]'        ; [ $bold = '\[\]' ] && bold=
+roman='\['`tput sgr0`'\]'       ; [ $roman = '\[\]' ] && roman=
+red='\['`tput setaf 1`'\]'      ; [ $red = '\[\]' ] && red=
+green='\['`tput setaf 2`'\]'   ; [ $green = '\[\]' ] && green=
+yellow='\['`tput setaf 3`'\]'   ; [ $yellow = '\[\]' ] && yellow=
+blue='\['`tput setaf 4`'\]'   ; [ $blue = '\[\]' ] && blue=
+normal='\['`tput setaf 9`'\]'   ; [ $normal = '\[\]' ] && normal=
+
+PS1=$bold$blue'\u'$roman'@'$green'\h'$roman':\W$(__git_ps1 " (%s)") '$bold$red'`echo $? | sed -e "s/0//" -e "s/[^0].*/& /"`'$yellow'\$'$normal$roman' '
 
 # git aliases
 alias gsmcl="git submodule foreach --recursive \"git reset --hard HEAD\"; find . -iname *conflicted* -delete"
