@@ -18,7 +18,7 @@ yellow='\['`tput setaf 3`'\]'   ; [ $yellow = '\[\]' ] && yellow=
 blue='\['`tput setaf 4`'\]'   ; [ $blue = '\[\]' ] && blue=
 normal='\['`tput setaf 9`'\]'   ; [ $normal = '\[\]' ] && normal=
 
-PS1=$bold$blue'\u'$roman'@'$green'\h'$roman':\W$(__git_ps1 " (%s)") '$bold$red'`echo $? | sed -e "s/0//" -e "s/[^0].*/& /"`'$yellow'\$'$normal$roman' '
+PS1=$bold$blue'\u'$roman'@'$green'\h'$roman':\w$(__git_ps1 " (%s)") '$bold$red'`echo $? | sed -e "s/0//" -e "s/[^0].*/& /"`'$yellow'\$'$normal$roman' '
 
 # git aliases
 alias gsmcl="git submodule foreach --recursive \"git reset --hard HEAD\"; find . -iname *conflicted* -delete"

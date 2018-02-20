@@ -31,5 +31,6 @@
 		"suppressResultsExplorerNotice": true,
 		"suppressUpdateNotice": false,
 		"suppressWelcomeNotice": true
-	}
+	},
+	"git.autofetch": true
 }
