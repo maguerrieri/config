@@ -1,8 +1,7 @@
 // Place your settings in this file to overwrite the default settings
 {
-	"editor.glyphMargin": true,
 	"editor.wordWrap": "wordWrapColumn",
-	"editor.wordWrapColumn": 80,
+	"editor.wordWrapColumn": 120,
 	"editor.wrappingIndent": "indent",
 	"editor.tabSize": 4,
 	"editor.scrollBeyondLastLine": false,
@@ -17,9 +16,9 @@
 	"files.insertFinalNewline": true,
 	"window.zoomLevel": 0,
 	"editor.rulers": [
-		80
+		120
 	],
-	"python.pythonPath": "python",
+	"python.pythonPath": "/usr/local/bin/python3.6",
 	"git.confirmSync": false,
 	"gitlens.advanced.messages": {
 		"suppressCommitHasNoPreviousCommitWarning": false,
@@ -32,5 +31,6 @@
 		"suppressUpdateNotice": false,
 		"suppressWelcomeNotice": true
 	},
-	"git.autofetch": true
+	"git.autofetch": true,
+	"gitlens.keymap": "alternate"
 }

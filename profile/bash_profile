@@ -1,8 +1,5 @@
-PROFILES="$HOME/Dropbox (Pocket Gems)/tech/config/profile"
-
 # aliases
 alias rmcf="find . -iname *conflicted* -delete"
-alias pip="pip2"
 
 # tab completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
@@ -34,11 +31,14 @@ export -f gcl
 # iTerm2 shell integration
 test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_integration.bash"
 
+export PATH="$HOME/dev/flutter/bin":$PATH
+
 # importing work, etc bash profiles
 OTHER_PROFILES=(
-	"$PROFILES/bash_profile"
+	"$HOME/db/tech/config/external/pg-config/profile/bash_profile"
 	)
 for profile_file in "${OTHER_PROFILES[@]}"
 do
+	echo "sourcing $profile_file"
 	source "$profile_file"
 done
