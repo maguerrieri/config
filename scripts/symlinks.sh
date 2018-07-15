@@ -1,6 +1,6 @@
 if [[ "$#" -ne 1 ]];
 then
-    cloud="db"
+    cloud=""
 else
     cloud=$1
 fi

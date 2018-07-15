@@ -31,7 +31,7 @@ export -f gcl
 # iTerm2 shell integration
 test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_integration.bash"
 
-export PATH="$HOME/dev/flutter/bin":$PATH
+export PATH="$HOME/.flutterbin/bin":$PATH
 
 # importing work, etc bash profiles
 OTHER_PROFILES=(
