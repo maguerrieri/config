@@ -32,6 +32,7 @@ export -f gcl
 test -e "$HOME/.iterm2_shell_integration.bash" && source "$HOME/.iterm2_shell_integration.bash"
 
 export PATH="$HOME/.flutterbin/bin":$PATH
+export PATH="$HOME/Library/Android/sdk/platform-tools":$PATH
 
 # importing work, etc bash profiles
 OTHER_PROFILES=(
