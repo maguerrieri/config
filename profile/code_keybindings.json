@@ -63,5 +63,24 @@
         "key": "f5",
         "command": "-workbench.action.debug.start",
         "when": "!inDebugMode"
+    },
+    {
+        "key": "cmd+r",
+        "command": "flutter.hotRestart",
+        "when": "dart-code:flutterProjectLoaded && inDebugMode"
+    },
+    {
+        "key": "ctrl+f5",
+        "command": "-flutter.hotRestart",
+        "when": "dart-code:flutterProjectLoaded && inDebugMode"
+    },
+    {
+        "key": "shift+cmd+j",
+        "command": "-workbench.action.search.toggleQueryDetails",
+        "when": "searchViewletVisible"
+    },
+    {
+        "key": "shift+cmd+j",
+        "command": "workbench.files.action.showActiveFileInExplorer"
     }
 ]
