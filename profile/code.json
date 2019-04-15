@@ -1,10 +1,8 @@
 // Place your settings in this file to overwrite the default settings
 {
-	"editor.wordWrap": "wordWrapColumn",
 	"editor.wordWrapColumn": 120,
 	"editor.wrappingIndent": "indent",
 	"editor.tabSize": 4,
-	"editor.renderWhitespace": "all",
 	"editor.fontFamily": "Hack, Menlo, Monaco, 'Courier New', monospace",
 	"window.restoreWindows": "all",
 	"terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
@@ -17,7 +15,7 @@
 	"editor.rulers": [
 		120
 	],
-	"python.pythonPath": "/usr/local/bin/python3.6",
+	"python.pythonPath": "/usr/local/bin/python",
 	"git.confirmSync": false,
 	"gitlens.advanced.messages": {
 		"suppressCommitHasNoPreviousCommitWarning": false,
@@ -36,5 +34,14 @@
 	"workbench.startupEditor": "newUntitledFile",
 	"dart.flutterSdkPath": "/Users/marioguerrieri/.flutterbin",
 	"gitlens.historyExplorer.enabled": true,
-	"workbench.colorTheme": "Darktooth"
+	"workbench.colorTheme": "Darktooth",
+	"editor.wordWrap": "wordWrapColumn",
+	"react-native.ios.env.device": {
+		"--device": "Mario's iPad"
+	},
+	"gitlens.views.fileHistory.enabled": true,
+	"gitlens.views.lineHistory.enabled": true,
+	"editor.renderWhitespace": "boundary",
+	"swift.path.sourcekite": "/Users/marioguerrieri/.bin/sourcekite",
+	"breadcrumbs.enabled": true
 }

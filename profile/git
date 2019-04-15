@@ -4,9 +4,9 @@
 	useConfigOnly = true
 [core]
 	editor = code --wait
-	excludesfile = /Users/marioguerrieri/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	trustctime = true
-	pager = less -+X
+	pager = less -+XF
 [mergetool]
 	prompt = false
 [mergetool "Kaleidoscope"]
@@ -17,6 +17,7 @@
 	trustExitCode = true
 [merge]
 	tool = Kaleidoscope
+	ff = only
 [difftool]
 	prompt = false
 [difftool "Kaleidoscope"]
@@ -26,3 +27,10 @@
 	path = 
 [diff]
 	tool = Kaleidoscope
+[diff "daff-csv"]
+	command = daff diff --git
+[merge "daff-csv"]
+	name = daff tabular csv merge
+	driver = daff merge --output %A %O %A %B
+[pull]
+	rebase = true

@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>customSites</key>
+	<dict>
+		<key>4A6F154A-156F-4CF6-A654-35DA2DE0CB5C</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>music</string>
+			<key>text</key>
+			<string>YouTube Music</string>
+			<key>url</key>
+			<string>https://music.youtube.com/search?q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+	</dict>
 	<key>onlyShowEnabledInPrefs</key>
 	<true/>
 </dict>
