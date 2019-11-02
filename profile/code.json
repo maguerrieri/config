@@ -43,5 +43,9 @@
 	"gitlens.views.lineHistory.enabled": true,
 	"editor.renderWhitespace": "boundary",
 	"swift.path.sourcekite": "/Users/marioguerrieri/.bin/sourcekite",
-	"breadcrumbs.enabled": true
+	"breadcrumbs.enabled": true,
+	"terminal.external.osxExec": "iTerm.app",
+	"editor.suggestSelection": "first",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	"python.jediEnabled": false
 }

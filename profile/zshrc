@@ -1,0 +1,26 @@
+export ZSH="/Users/mario/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
+# aliases
+alias rmcf="find . -iname *conflicted* -delete"
+
+alias iamme="git config user.email mario@guerrieri.codes"
+alias iampg="git config user.email mario@pocketgems.com"
+
+# git aliases
+alias gsmcl="git submodule foreach --recursive \"git reset --hard HEAD\"; find . -iname *conflicted* -delete"
+alias gsmuir="git submodule update --init --recursive"
+unalias gcl
+function gcl {
+	rm -rf $(git status -s)
+	git reset --hard HEAD
+	gsmcl
+	gsmuir
+}
+
+export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
+export GAE_SDK_ROOT="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/platform/google_appengine"
+export PATH="$PATH:$GAE_SDK_ROOT"
+export PYTHONPATH="$GAE_SDK_ROOT:$PYTHONPATH"

@@ -6,6 +6,7 @@ else
 fi
 
 gln -s "$HOME/$cloud/tech/config/profile/bash_profile" "$HOME/.bash_profile"
+gln -s "$HOME/$cloud/tech/config/profile/zshrc" "$HOME/.zshrc"
 gln -s "$HOME/$cloud/tech/config/profile/code.json" "$HOME/Library/Application Support/Code/User/settings.json"
 gln -s "$HOME/$cloud/tech/config/profile/code_keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json"
 gln -s "$HOME/$cloud/tech/config/profile/git" "$HOME/.gitconfig"
