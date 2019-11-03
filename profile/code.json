@@ -47,5 +47,9 @@
 	"terminal.external.osxExec": "iTerm.app",
 	"editor.suggestSelection": "first",
 	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-	"python.jediEnabled": false
+	"python.jediEnabled": false,
+	"sync.gist": "18c1da4bb7ecc1fffa221058939f3ee2",
+	"sync.autoUpload": true,
+	"sync.autoDownload": true,
+	"sync.forceDownload": false
 }
