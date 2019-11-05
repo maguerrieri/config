@@ -40,7 +40,7 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 
 # importing work, etc bash profiles
 OTHER_PROFILES=(
-	"$HOME/db/tech/config/external/pg-config/profile/bash_profile"
+	"$HOME/tech/config/external/pg-config/profile/bash_profile"
 	)
 for profile_file in "${OTHER_PROFILES[@]}"
 do
