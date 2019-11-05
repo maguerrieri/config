@@ -3,7 +3,11 @@
 import sys
 import os
 
+cloud = "icloud"
+
 links = {
+    "$HOME/Library/Mobile Documents/com~apple~CloudDocs": "$HOME/icloud",
+    "$HOME/{cloud}/tech": "$HOME/tech",
     "$HOME/tech/config/profile/bash_profile": "$HOME/.bash_profile",
     "$HOME/tech/config/profile/zshrc": "$HOME/.zshrc",
     "$HOME/tech/config/profile/code.json" :"$HOME/Library/Application Support/Code/User/settings.json",
@@ -12,8 +16,8 @@ links = {
     "$HOME/tech/config/profile/gitignore": "$HOME/.gitignore_global",
 }
 for (target, name) in links.items():
-    expanded_target = os.path.expandvars(target)
-    expanded_name = os.path.expandvars(name)
+    expanded_target = os.path.expandvars(target).format(**locals())
+    expanded_name = os.path.expandvars(name).format(**locals())
 
     if os.path.islink(expanded_name):
         print(f"Deleting existing symlink `{expanded_name}`.")
