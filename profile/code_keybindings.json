@@ -92,5 +92,13 @@
         "key": "shift+cmd+f5",
         "command": "-workbench.action.debug.restart",
         "when": "inDebugMode"
+    },
+    {
+        "key": "shift+alt+n",
+        "command": "merge-conflict.next"
+    },
+    {
+        "key": "shift+alt+cmd+a",
+        "command": "merge-conflict.accept.all-incoming"
     }
 ]
