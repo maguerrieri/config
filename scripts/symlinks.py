@@ -1,21 +1,107 @@
 #!/usr/bin/env python3
 
+from typing import List, Tuple, Union
+
 import sys
 import os
+import argparse
 
-cloud = "icloud"
+from pathlib import PureWindowsPath
 
-links = {
-    "$HOME/Library/Mobile Documents/com~apple~CloudDocs": "$HOME/icloud",
-    "$HOME/{cloud}/tech": "$HOME/tech",
-    "$HOME/tech/config/profile/bash_profile": "$HOME/.bash_profile",
-    "$HOME/tech/config/profile/zshrc": "$HOME/.zshrc",
-    "$HOME/tech/config/profile/code.json" :"$HOME/Library/Application Support/Code/User/settings.json",
-    "$HOME/tech/config/profile/code_keybindings.json": "$HOME/Library/Application Support/Code/User/keybindings.json",
-    "$HOME/tech/config/profile/git": "$HOME/.gitconfig",
-    "$HOME/tech/config/profile/gitignore": "$HOME/.gitignore_global",
-}
-for (target, name) in links.items():
+parser = argparse.ArgumentParser("Set up your symlinks")
+parser.add_argument("--cloud")
+parser.add_argument("--shortcloud")
+
+args = parser.parse_args()
+cloud = args.cloud or "icloud"
+shortcloud = args.shortcloud or cloud
+
+class UnsupportedPlatformException(Exception):
+    pass
+
+is_wsl = len(os.popen("which cmd.exe").readline().strip()) > 0
+
+def home_path() -> str:
+    posix_path = os.path.expandvars("$HOME")
+    if os.path.exists(posix_path) and not is_wsl:
+        return posix_path
+
+    wsl_path = os.popen("wslpath $(cmd.exe /C \"echo %USERPROFILE%\")").readline().strip()
+    if os.path.exists(wsl_path):
+        return wsl_path
+    
+    raise UnsupportedPlatformException()
+home_path = home_path()
+print(f"Home directory: {home_path}")
+
+def cloud_path() -> str:
+    macos_path = "$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+    if os.path.exists(macos_path):
+        return macos_path
+
+    wsl_path = os.path.join(home_path, cloud)
+    if os.path.exists(wsl_path):
+        return wsl_path
+    
+    raise FileNotFoundError(f"Can't find cloud directory named {cloud}")
+cloud_path = cloud_path()
+print(f"Cloud path: {cloud_path}")
+
+wsl_root_path = "/mnt/c"
+def root_relative_wsl_path(path: str):
+    if path.startswith(wsl_root_path):
+        return path[len(wsl_root_path):]
+    else:
+        return path
+
+def code_settings_path() -> str:
+    macos_path = os.path.join(home_path, "Library", "Application Support", "Code", "User")
+    if os.path.exists(macos_path):
+        return macos_path
+    
+    wsl_path = os.path.join(home_path, "AppData", "Roaming", "Code", "User")
+    if os.path.exists(wsl_path):
+        return wsl_path
+
+    raise FileNotFoundError("Can't find Visual Studio Code settings")
+code_settings_path = code_settings_path()
+print(f"Visual Studio Code settings: {code_settings_path}")
+
+def make_symlink(target: str, source: str, use_mklink=False):
+    if use_mklink:
+        cmd_path = os.popen("which cmd.exe").readline().strip()
+        if len(cmd_path) > 0:
+            win_source = "C:" / PureWindowsPath(root_relative_wsl_path(source))
+            win_target = "C:" / PureWindowsPath(root_relative_wsl_path(target))
+
+            os.system(f"cmd.exe /C \"mklink {win_source} {win_target}\"")
+            return
+    
+    os.symlink(target, source)
+
+links: List[Tuple[str, str, List[str], bool]] = [
+    (f"{cloud_path}", f"$HOME/{shortcloud}", None, False),
+    (f"{cloud_path}/tech", "$HOME/tech", None, False),
+    (f"{cloud_path}/tech/config/profile/bash_profile", "$HOME/.bash_profile", None, False),
+    (f"{cloud_path}/tech/config/profile/zshrc", "$HOME/.zshrc", None, False),
+    (f"{cloud_path}/tech/config/profile/code.json", f"{code_settings_path}/settings.json", None, True),
+    (f"{cloud_path}/tech/config/profile/code_keybindings.json", f"{code_settings_path}/keybindings.json", None, True),
+    (f"{cloud_path}/tech/config/profile/git", "$HOME/.gitconfig", None, False),
+    (f"{cloud_path}/tech/config/profile/gitignore", "$HOME/.gitignore_global", None, False),
+    (
+        f"{cloud_path}/tech/config/profile/windows-terminal.json",
+        f"{home_path}/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json",
+        ['wsl'], 
+        True
+    ),
+]
+
+for (target, name, platforms, mklink_if_wsl) in links:
+    if not (platforms is None
+            or sys.platform in platforms and not is_wsl
+            or "wsl" in platforms and is_wsl):
+        continue
+
     expanded_target = os.path.expandvars(target).format(**locals())
     expanded_name = os.path.expandvars(name).format(**locals())
 
@@ -31,5 +117,5 @@ for (target, name) in links.items():
             print(f"`{backup}` also exists; aborting.")
             sys.exit()
     
-    os.symlink(expanded_target, expanded_name)
     print(f"Linking `{expanded_name}` -> `{expanded_target}`.")
+    make_symlink(expanded_target, expanded_name, mklink_if_wsl)
