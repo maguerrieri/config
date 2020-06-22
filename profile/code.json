@@ -35,7 +35,6 @@
 	"dart.flutterSdkPath": "/Users/marioguerrieri/.flutterbin",
 	"gitlens.historyExplorer.enabled": true,
 	"workbench.colorTheme": "Darktooth",
-	"editor.wordWrap": "wordWrapColumn",
 	"react-native.ios.env.device": {
 		"--device": "Mario's iPad"
 	},
@@ -51,5 +50,9 @@
 	"sync.gist": "18c1da4bb7ecc1fffa221058939f3ee2",
 	"sync.autoUpload": true,
 	"sync.autoDownload": true,
-	"sync.forceDownload": false
+	"sync.forceDownload": false,
+	"java.configuration.checkProjectSettingsExclusions": false,
+	"git.enableSmartCommit": true,
+	"java.semanticHighlighting.enabled": true,
+	"debug.onTaskErrors": "abort"
 }
