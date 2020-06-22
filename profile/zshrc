@@ -3,6 +3,8 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
+[[ -d "/mnt/c/Users/mario" ]] && alias -g w~="/mnt/c/Users/mario"
+
 # aliases
 alias rmcf="find . -iname *conflicted* -delete"
 
