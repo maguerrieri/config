@@ -35,7 +35,7 @@ home_path = home_path()
 print(f"Home directory: {home_path}")
 
 def cloud_path() -> str:
-    macos_path = "$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+    macos_path = os.path.expandvars("$HOME/Library/Mobile Documents/com~apple~CloudDocs")
     if os.path.exists(macos_path):
         return macos_path
 
