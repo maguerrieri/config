@@ -200,7 +200,7 @@
 	<key>LeftOption</key>
 	<integer>2</integer>
 	<key>MaxVertically</key>
-	<false/>
+	<true/>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1493,7 +1493,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.0287674134036142</real>
+			<real>1.03</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -1591,6 +1591,8 @@
 	<integer>10</integer>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
+	<key>UIElementRequiresHotkeys</key>
+	<true/>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
