@@ -54,5 +54,5 @@
 	"java.configuration.checkProjectSettingsExclusions": false,
 	"git.enableSmartCommit": true,
 	"java.semanticHighlighting.enabled": true,
-	"debug.onTaskErrors": "abort"
+	"gitlens.defaultDateStyle": "absolute"
 }
