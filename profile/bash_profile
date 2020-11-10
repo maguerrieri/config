@@ -49,3 +49,5 @@ do
 done
 
 alias iamme="git config user.email mario@guerrieri.codes"
+
+export PATH="$HOME/.cargo/bin:$PATH"
