@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>build</key>
-	<real>975</real>
+	<string>1151</string>
 	<key>license</key>
 	<dict>
 		<key>email</key>
@@ -13,6 +13,8 @@
 	</dict>
 	<key>preferences</key>
 	<dict>
+		<key>Battery_MenubarItems</key>
+		<array/>
 		<key>Battery_MenubarMode</key>
 		<array>
 			<dict>
@@ -33,43 +35,39 @@
 				<string>A3F49FFA-F93D-4EDF-BFE1-3F852125E170</string>
 			</dict>
 		</array>
+		<key>CPU_ProcessCount</key>
+		<integer>8</integer>
 		<key>CombinedDropdownDisplayMode</key>
 		<array>
 			<dict>
 				<key>key</key>
 				<string>1</string>
 				<key>uuid</key>
-				<string>46BB6A18-63C2-4DE1-BECC-3A6B35971B93</string>
+				<string>E359881F-8C0C-4CFC-964A-2A8D3E959B21</string>
 			</dict>
 			<dict>
 				<key>key</key>
 				<string>2</string>
 				<key>uuid</key>
-				<string>BA49297A-1064-4852-AF7C-2CF704056F5F</string>
+				<string>9B9038DB-E19A-41A3-A9CE-A81FC8D754DA</string>
 			</dict>
 			<dict>
 				<key>key</key>
 				<string>3</string>
 				<key>uuid</key>
-				<string>028A8540-9CD4-43DC-AD35-6D9AF1F9018D</string>
+				<string>DA367E9E-F793-4FEA-8196-E02FE6A25DDD</string>
 			</dict>
 			<dict>
 				<key>key</key>
 				<string>4</string>
 				<key>uuid</key>
-				<string>97C7BD62-D1A6-4E26-B538-F24C4DC370F2</string>
+				<string>6FBC7DEC-88D5-4E69-AC63-6DFECF7F737B</string>
 			</dict>
 			<dict>
 				<key>key</key>
 				<string>5</string>
 				<key>uuid</key>
-				<string>D13BFA91-9609-4372-97CF-F8C2D0DEBA01</string>
-			</dict>
-			<dict>
-				<key>key</key>
-				<string>6</string>
-				<key>uuid</key>
-				<string>5F2B1971-DA09-4C15-8247-50AECEF719CE</string>
+				<string>85C665EF-28B1-4F61-8A82-09E02442B4D1</string>
 			</dict>
 		</array>
 		<key>CombinedMenubarDisplayMode</key>
@@ -91,8 +89,6 @@
 				<true/>
 				<key>key</key>
 				<string>0AA2B16D-C7D1-3F71-A282-44ADE7D4145E</string>
-				<key>name</key>
-				<string>Macintosh HD</string>
 			</dict>
 		</array>
 		<key>Disks_MenubarMode</key>
@@ -104,83 +100,14 @@
 				<string>5E6FD331-73E4-4852-B36D-BE4AC169528F</string>
 			</dict>
 		</array>
+		<key>Disks_ProcessCount</key>
+		<integer>8</integer>
 		<key>Disks_SeperateFusion</key>
 		<integer>1</integer>
 		<key>DropdownTheme</key>
 		<integer>0</integer>
 		<key>FanControl_Sets</key>
-		<array>
-			<dict>
-				<key>model</key>
-				<string>MacBookPro13,2</string>
-				<key>name</key>
-				<string>Medium</string>
-				<key>speeds</key>
-				<array>
-					<dict>
-						<key>fan</key>
-						<string>F0Ac</string>
-						<key>high</key>
-						<integer>6336</integer>
-						<key>low</key>
-						<integer>1250</integer>
-						<key>percentage</key>
-						<real>0.5</real>
-						<key>speed</key>
-						<integer>3793</integer>
-					</dict>
-					<dict>
-						<key>fan</key>
-						<string>F1Ac</string>
-						<key>high</key>
-						<integer>6864</integer>
-						<key>low</key>
-						<integer>1350</integer>
-						<key>percentage</key>
-						<real>0.5</real>
-						<key>speed</key>
-						<integer>4107</integer>
-					</dict>
-				</array>
-				<key>uuid</key>
-				<string>B2327826-A606-4D4C-B6CC-5CFB85CC352D</string>
-			</dict>
-			<dict>
-				<key>model</key>
-				<string>MacBookPro13,2</string>
-				<key>name</key>
-				<string>High</string>
-				<key>speeds</key>
-				<array>
-					<dict>
-						<key>fan</key>
-						<string>F0Ac</string>
-						<key>high</key>
-						<integer>6336</integer>
-						<key>low</key>
-						<integer>1250</integer>
-						<key>percentage</key>
-						<real>1</real>
-						<key>speed</key>
-						<integer>6336</integer>
-					</dict>
-					<dict>
-						<key>fan</key>
-						<string>F1Ac</string>
-						<key>high</key>
-						<integer>6864</integer>
-						<key>low</key>
-						<integer>1350</integer>
-						<key>percentage</key>
-						<real>1</real>
-						<key>speed</key>
-						<integer>6864</integer>
-					</dict>
-				</array>
-				<key>uuid</key>
-				<string>BF6B90B5-155C-43FA-8BAD-8500AB00FFA3</string>
-			</dict>
-		</array>
+		<array/>
 		<key>Memory_MenubarMode</key>
 		<array>
 			<dict>
@@ -190,6 +117,12 @@
 				<string>6B0B1337-96F0-4457-A4DB-28A5A0B7DA96</string>
 			</dict>
 		</array>
+		<key>Memory_ProcessCount</key>
+		<integer>8</integer>
+		<key>Menubar-DetectedColor</key>
+		<string>0.92 0.92 0.92 1.00</string>
+		<key>MenubarGraphOpacity-Dark</key>
+		<real>1</real>
 		<key>MenubarTheme</key>
 		<integer>1</integer>
 		<key>MigratedExtras_5.0</key>
@@ -200,6 +133,10 @@
 		<true/>
 		<key>Migrated_6.0</key>
 		<true/>
+		<key>Migrated_6.22</key>
+		<true/>
+		<key>Migrated_6.5</key>
+		<true/>
 		<key>Network_MenubarMode</key>
 		<array>
 			<dict>
@@ -209,8 +146,10 @@
 				<string>5F095496-EB55-410F-B74A-BCC70C666F31</string>
 			</dict>
 		</array>
+		<key>Network_ProcessCount</key>
+		<integer>8</integer>
 		<key>Notifications-Enabled</key>
-		<false/>
+		<true/>
 		<key>Notifications-Items</key>
 		<array/>
 		<key>Sensors-Limits-Updated</key>
@@ -249,8 +188,13 @@
 		</array>
 		<key>TimerFrequency</key>
 		<integer>2</integer>
+		<key>Updater_Attempts</key>
+		<dict>
+			<key>1150</key>
+			<string>1</string>
+		</dict>
 	</dict>
 	<key>version</key>
-	<real>6.0999999046325684</real>
+	<string>6.50</string>
 </dict>
 </plist>
