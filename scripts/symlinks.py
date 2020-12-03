@@ -3,6 +3,7 @@
 from typing import List, Tuple, Union
 
 import sys
+import platform
 import os
 import argparse
 
@@ -79,31 +80,55 @@ def make_symlink(target: str, source: str, use_mklink=False):
     
     os.symlink(target, source)
 
-links: List[Tuple[str, str, List[str], bool]] = [
-    (f"{cloud_path}", f"$HOME/{shortcloud}", None, False),
-    (f"{cloud_path}/tech", "$HOME/tech", None, False),
-    (f"{cloud_path}/tech/config/profile/bash_profile", "$HOME/.bash_profile", None, False),
-    (f"{cloud_path}/tech/config/profile/zshrc", "$HOME/.zshrc", None, False),
-    (f"{cloud_path}/tech/config/profile/code.json", f"{code_settings_path}/settings.json", None, True),
-    (f"{cloud_path}/tech/config/profile/code_keybindings.json", f"{code_settings_path}/keybindings.json", None, True),
-    (f"{cloud_path}/tech/config/profile/git", "$HOME/.gitconfig", None, False),
-    (f"{cloud_path}/tech/config/profile/gitignore", "$HOME/.gitignore_global", None, False),
-    (
+class Link:
+    def __init__(self, 
+                 target: str,
+                 name: str, 
+                 platforms: List[str]=None, 
+                 archs: List[str]=None, 
+                 mklink_if_wsl: bool=False) -> None:
+        self.target = target
+        self.name = name
+        self.platforms = platforms
+        self.archs = archs
+        self.mklink_if_wsl = mklink_if_wsl
+
+    def __iter__(self):
+        yield from [
+            self.target,
+            self.name,
+            self.platforms,
+            self.archs,
+            self.mklink_if_wsl,
+        ]
+
+    def match(self, platform, arch):
+        return ((self.platforms is None or platform in self.platforms)
+                and (self.archs is None or arch in self.archs))
+
+links: List[Link] = [
+    Link(f"{cloud_path}", f"$HOME/{shortcloud}"),
+    Link(f"{cloud_path}/tech", "$HOME/tech"),
+    Link(f"{cloud_path}/tech/config/profile/bash_profile", "$HOME/.bash_profile"),
+    Link(f"{cloud_path}/tech/config/profile/zshrc", "$HOME/.zshrc"),
+    Link(f"{cloud_path}/tech/config/profile/code.json", f"{code_settings_path}/settings.json", mklink_if_wsl=True),
+    Link(f"{cloud_path}/tech/config/profile/code_keybindings.json", f"{code_settings_path}/keybindings.json", mklink_if_wsl=True),
+    Link(f"{cloud_path}/tech/config/profile/git", "$HOME/.gitconfig"),
+    Link(f"{cloud_path}/tech/config/profile/gitignore", "$HOME/.gitignore_global"),
+    Link(
         f"{cloud_path}/tech/config/profile/windows-terminal.json",
         f"{home_path}/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json",
         ['wsl'], 
-        True
+        mklink_if_wsl=True
     ),
 ]
 
-for (target, name, platforms, mklink_if_wsl) in links:
-    if not (platforms is None
-            or sys.platform in platforms and not is_wsl
-            or "wsl" in platforms and is_wsl):
+for link in links:
+    if not link.match("wsl" if is_wsl else sys.platform, platform.processor()):
         continue
 
-    expanded_target = os.path.expandvars(target).format(**locals())
-    expanded_name = os.path.expandvars(name).format(**locals())
+    expanded_target = os.path.expandvars(link.target).format(**locals())
+    expanded_name = os.path.expandvars(link.name).format(**locals())
 
     if os.path.islink(expanded_name):
         print(f"Deleting existing symlink `{expanded_name}`.")
@@ -118,4 +143,4 @@ for (target, name, platforms, mklink_if_wsl) in links:
             sys.exit()
     
     print(f"Linking `{expanded_name}` -> `{expanded_target}`.")
-    make_symlink(expanded_target, expanded_name, mklink_if_wsl)
+    make_symlink(expanded_target, expanded_name, link.mklink_if_wsl)
