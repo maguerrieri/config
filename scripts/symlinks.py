@@ -121,6 +121,12 @@ links: List[Link] = [
         ['wsl'], 
         mklink_if_wsl=True
     ),
+    Link(
+        f"{cloud_path}/tech/config/scripts/ibrew",
+        f"/usr/local/bin/ibrew",
+        platforms=['darwin'], 
+        archs=['arm'],
+    ),
 ]
 
 for link in links:
