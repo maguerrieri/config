@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+
+"""
+Creates a nativefied version of YNAB.
+"""
+
+import platform
+import os
+
+from sh import Command
+
+nativefier = Command("nativefier")
+
+def arch():
+    """
+    Returns the architecture of the current system.
+    """
+    if platform.processor() == "arm":
+        print("Nativefying for ARM")
+        return "arm64"
+    print("Nativefying for x64")
+    return "x64"
+ARCH = arch()
+
+print(nativefier("--arch", ARCH,
+                 "--icon", os.path.expandvars("$HOME/icloud/img/icon/ynab.icns"),
+                 "app.youneedabudget.com",
+                 os.path.expandvars("$HOME/tech/config/scripts/nativefier/apps")))
