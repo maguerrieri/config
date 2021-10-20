@@ -94,11 +94,35 @@
         "when": "inDebugMode"
     },
     {
-        "key": "shift+alt+n",
+        "key": "ctrl+alt+n",
         "command": "merge-conflict.next"
     },
     {
-        "key": "shift+alt+cmd+a",
+        "key": "ctrl+shift+alt+i",
         "command": "merge-conflict.accept.all-incoming"
+    },
+    {
+        "key": "ctrl+shift+alt+n",
+        "command": "merge-conflict.previous"
+    },
+    {
+        "key": "ctrl+alt+c",
+        "command": "merge-conflict.accept.current"
+    },
+    {
+        "key": "ctrl+alt+b",
+        "command": "merge-conflict.accept.both"
+    },
+    {
+        "key": "ctrl+alt+i",
+        "command": "merge-conflict.accept.incoming"
+    },
+    {
+        "key": "ctrl+shift+alt+b",
+        "command": "merge-conflict.accept.all-both"
+    },
+    {
+        "key": "ctrl+shift+alt+c",
+        "command": "merge-conflict.accept.all-current"
     }
 ]
