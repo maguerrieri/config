@@ -55,19 +55,6 @@ def root_relative_wsl_path(path: str):
     else:
         return path
 
-def code_settings_path() -> str:
-    macos_path = os.path.join(home_path, "Library", "Application Support", "Code", "User")
-    if os.path.exists(macos_path):
-        return macos_path
-    
-    wsl_path = os.path.join(home_path, "AppData", "Roaming", "Code", "User")
-    if os.path.exists(wsl_path):
-        return wsl_path
-
-    raise FileNotFoundError("Can't find Visual Studio Code settings")
-code_settings_path = code_settings_path()
-print(f"Visual Studio Code settings: {code_settings_path}")
-
 def make_symlink(target: str, source: str, use_mklink=False):
     if use_mklink:
         cmd_path = os.popen("which cmd.exe").readline().strip()
@@ -109,10 +96,8 @@ class Link:
 links: List[Link] = [
     Link(f"{cloud_path}", f"$HOME/{shortcloud}"),
     Link(f"{cloud_path}/tech", "$HOME/tech"),
-    Link(f"{cloud_path}/tech/config/profile/bash_profile", "$HOME/.bash_profile"),
     Link(f"{cloud_path}/tech/config/profile/zshrc", "$HOME/.zshrc"),
-    Link(f"{cloud_path}/tech/config/profile/code.json", f"{code_settings_path}/settings.json", mklink_if_wsl=True),
-    Link(f"{cloud_path}/tech/config/profile/code_keybindings.json", f"{code_settings_path}/keybindings.json", mklink_if_wsl=True),
+    Link(f"{cloud_path}/tech/config/profile/zprofile", "$HOME/.zprofile"),
     Link(f"{cloud_path}/tech/config/profile/git", "$HOME/.gitconfig"),
     Link(f"{cloud_path}/tech/config/profile/gitignore", "$HOME/.gitignore_global"),
     Link(
@@ -123,7 +108,7 @@ links: List[Link] = [
     ),
     Link(
         f"{cloud_path}/tech/config/scripts/ibrew",
-        f"/usr/local/bin/ibrew",
+        f"{home_path}/.local/bin/ibrew",
         platforms=['darwin'], 
         archs=['arm'],
     ),

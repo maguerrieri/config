@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/home/mario/.local/bin/python",
+    "python.pythonPath": "/Users/mario/.pyenv/versions/3.10.0/bin/python",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true
 }
