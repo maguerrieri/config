@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 arch -x86_64 /usr/local/Homebrew/bin/brew "$@"

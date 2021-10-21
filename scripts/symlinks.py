@@ -107,10 +107,26 @@ links: List[Link] = [
         mklink_if_wsl=True
     ),
     Link(
-        f"{cloud_path}/tech/config/scripts/ibrew",
+        f"{cloud_path}/tech/config/bin/ibrew",
         f"{home_path}/.local/bin/ibrew",
-        platforms=['darwin'], 
+        platforms=['darwin'],
         archs=['arm'],
+    ),
+    Link(
+        f"{cloud_path}/tech/config/bin/git-cl",
+        f"{home_path}/.local/bin/git-cl",
+    ),
+    Link(
+        f"{cloud_path}/tech/config/bin/git-smu",
+        f"{home_path}/.local/bin/git-smu",
+    ),
+    Link(
+        f"{cloud_path}/tech/config/bin/git-iamme",
+        f"{home_path}/.local/bin/git-iamme",
+    ),
+    Link(
+        f"{cloud_path}/tech/config/bin/git-iampg",
+        f"{home_path}/.local/bin/git-iampg",
     ),
 ]
 

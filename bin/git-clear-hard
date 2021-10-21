@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+rm -rf $(git status -s)
+git reset --hard HEAD
+git clear
+git smu
