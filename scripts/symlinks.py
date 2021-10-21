@@ -7,7 +7,7 @@ import platform
 import os
 import argparse
 
-from pathlib import PureWindowsPath
+from pathlib import Path, PureWindowsPath
 
 parser = argparse.ArgumentParser("Set up your symlinks")
 parser.add_argument("--cloud")
@@ -22,25 +22,29 @@ class UnsupportedPlatformException(Exception):
 
 is_wsl = len(os.popen("which cmd.exe").readline().strip()) > 0
 
-def home_path() -> str:
-    posix_path = os.path.expandvars("$HOME")
-    if os.path.exists(posix_path) and not is_wsl:
-        return posix_path
+def home_path() -> Path:
+    return Path("~").expanduser()
+home_path = home_path()
+print(f"Home directory: {home_path}")
+
+def real_home_path() -> str:
+    if not is_wsl:
+        return home_path
 
     wsl_path = os.popen("wslpath $(cmd.exe /C \"echo %USERPROFILE%\")").readline().strip()
     if os.path.exists(wsl_path):
         return wsl_path
     
     raise UnsupportedPlatformException()
-home_path = home_path()
-print(f"Home directory: {home_path}")
+real_home_path = real_home_path()
+print(f"Platform home directory: {real_home_path}")
 
 def cloud_path() -> str:
     macos_path = os.path.expandvars("$HOME/Library/Mobile Documents/com~apple~CloudDocs")
     if os.path.exists(macos_path):
         return macos_path
 
-    wsl_path = os.path.join(home_path, cloud)
+    wsl_path = os.path.join(real_home_path, cloud)
     if os.path.exists(wsl_path):
         return wsl_path
     
@@ -102,7 +106,7 @@ links: List[Link] = [
     Link(f"{cloud_path}/tech/config/profile/gitignore", "$HOME/.gitignore_global"),
     Link(
         f"{cloud_path}/tech/config/profile/windows-terminal.json",
-        f"{home_path}/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json",
+        f"{real_home_path}/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json",
         ['wsl'], 
         mklink_if_wsl=True
     ),
@@ -113,11 +117,11 @@ links: List[Link] = [
         archs=['arm'],
     ),
     Link(
-        f"{cloud_path}/tech/config/bin/git-cl",
+        f"{cloud_path}/tech/config/bin/git-clear-hard",
         f"{home_path}/.local/bin/git-cl",
     ),
     Link(
-        f"{cloud_path}/tech/config/bin/git-smu",
+        f"{cloud_path}/tech/config/bin/git-submodule-update",
         f"{home_path}/.local/bin/git-smu",
     ),
     Link(
