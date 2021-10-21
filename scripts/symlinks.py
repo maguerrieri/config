@@ -121,6 +121,10 @@ links: List[Link] = [
         f"{home_path}/.local/bin/git-cl",
     ),
     Link(
+        f"{cloud_path}/tech/config/bin/git-clear",
+        f"{home_path}/.local/bin/git-clear",
+    ),
+    Link(
         f"{cloud_path}/tech/config/bin/git-submodule-update",
         f"{home_path}/.local/bin/git-smu",
     ),
