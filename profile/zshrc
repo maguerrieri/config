@@ -1,13 +1,8 @@
-# Set up local function and Homebrew completion function directories
-export FPATH="$HOME/.zfunc:$(brew --prefix)/share/zsh/site-functions:$FPATH"
 
-function iswsl() {
-    if [[ $(uname -r) =~ ^.*[Mm]icrosoft.*$ ]]; then
-        return 0
-    else
-        return 1
-    fi
-}
+if ( ! iswsl ); then
+    # Set up local function and Homebrew completion function directories
+    export FPATH="$HOME/.zfunc:$(brew --prefix)/share/zsh/site-functions:$FPATH"
+fi
 
 # Oh My Zsh
 export ZSH="$HOME/.oh-my-zsh"
@@ -16,8 +11,10 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
 
-# pyenv
-eval "$(pyenv init -)"
+if ( ! iswsl ); then
+    # pyenv
+    eval "$(pyenv init -)"
+fi
 
 # used by `git-iamme` and `git-iampg` to set repo-specific email addresses
 export PG_EMAIL=mario@pocketgems.com
@@ -30,14 +27,17 @@ export EDITOR="code --wait"
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.npm/bin:$PATH"
-if [[ $(arch) = "arm64" ]]; then; export PATH="/opt/homebrew/bin:$PATH"; fi
-if [[ $(iswsl) ]]; then; hash -d w=$(wslpath "$(wslvar USERPROFILE)"); fi
+if ( iswsl ); then
+    hash -d w=$(wslpath "$(wslvar USERPROFILE)")
+else
+    if [[ $(arch) = "arm64" ]]; then; export PATH="/opt/homebrew/bin:$PATH"; fi
 
-export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
-export GAE_SDK_ROOT="$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/platform/google_appengine"
-export PATH="$PATH:$GAE_SDK_ROOT"
-export PYTHONPATH="$GAE_SDK_ROOT:$PYTHONPATH"
+    export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
+    export GAE_SDK_ROOT="$(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/platform/google_appengine"
+    export PATH="$PATH:$GAE_SDK_ROOT"
+    export PYTHONPATH="$GAE_SDK_ROOT:$PYTHONPATH"
 
-# shell completions for Google Cloud
-source $(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-source $(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+    # shell completions for Google Cloud
+    source $(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+    source $(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+fi
