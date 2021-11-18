@@ -1,5 +1,7 @@
 
-if ( ! iswsl ); then
+if ( iswsl ); then
+    export FPATH="$HOME/.zfunc:$FPATH"
+else;
     # Set up local function and Homebrew completion function directories
     export FPATH="$HOME/.zfunc:$(brew --prefix)/share/zsh/site-functions:$FPATH"
 fi
@@ -11,7 +13,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
 
-if ( ! iswsl ); then
+if [[ -x "$(command -v pyenv)" ]]; then
     # pyenv
     eval "$(pyenv init -)"
 fi
@@ -27,6 +29,7 @@ export EDITOR="code --wait"
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.npm/bin:$PATH"
+
 if ( iswsl ); then
     hash -d w=$(wslpath "$(wslvar USERPROFILE)")
 else
