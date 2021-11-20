@@ -1,6 +1,14 @@
 
 if ( iswsl ); then
     export FPATH="$HOME/.zfunc:$FPATH"
+
+    # Set up WSL keychain
+    if [ -f $HOME/.ssh/id_rsa ]; then
+        keychain --nogui --quiet $HOME/.ssh/id_rsa
+    elif [ -f $HOME/.ssh/id_ed25519 ]; then
+        keychain --nogui --quiet $HOME/.ssh/id_ed25519
+    fi
+    source $HOME/.keychain/$(hostname)-sh
 else;
     # Set up local function and Homebrew completion function directories
     export FPATH="$HOME/.zfunc:$(brew --prefix)/share/zsh/site-functions:$FPATH"
