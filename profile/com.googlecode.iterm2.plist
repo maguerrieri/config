@@ -843,7 +843,7 @@
 			<key>Window Type</key>
 			<integer>2</integer>
 			<key>Working Directory</key>
-			<string>~/dev</string>
+			<string>~/Developer</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -1337,7 +1337,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>0</integer>
 			<key>Scrollback With Status Bar</key>
 			<false/>
 			<key>Scrollback in Alternate Screen</key>
@@ -1499,7 +1499,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>~/dev</string>
+			<string>~/Developer</string>
 		</dict>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
