@@ -21,12 +21,6 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
 
-if [[ -x "$(command -v pyenv)" ]]; then
-    # pyenv
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
 # used by `git-iamme` and `git-iampg` to set repo-specific email addresses
 export PG_EMAIL=mario@pocketgems.com
 export PERSONAL_EMAIL=mario@guerrieri.codes
@@ -52,4 +46,10 @@ else
     # shell completions for Google Cloud
     source $(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
     source $(brew --caskroom)/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+fi
+
+if [[ -x "$(command -v pyenv)" ]]; then
+    # pyenv
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
 fi
