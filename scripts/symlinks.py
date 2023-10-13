@@ -97,7 +97,7 @@ class Link:
         return ((self.platforms is None or platform in self.platforms)
                 and (self.archs is None or arch in self.archs))
 
-links: List[Link] = [
+links = [
     Link(f"{cloud_path}", f"$HOME/{shortcloud}"),
     Link(f"{cloud_path}/tech", "$HOME/tech"),
     Link(f"{cloud_path}/tech/config/profile/zshrc", "$HOME/.zshrc"),
@@ -135,6 +135,10 @@ links: List[Link] = [
     Link(
         f"{cloud_path}/tech/config/bin/git-iampg",
         f"{home_path}/.local/bin/git-iampg",
+    ),
+    Link(
+        f"{home_path}/Developer/androidsigning/keystores/debug_pg.keystore",
+        f"{home_path}/.android/debug.keystore",
     ),
 ]
 
