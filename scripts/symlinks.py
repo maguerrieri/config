@@ -52,7 +52,7 @@ print(f"Cloud path: {cloud_path}")
 
 wsl_root_path = PureWindowsPath(Path("/mnt/c").resolve())
 
-def make_symlink(target: Path, source: Path, use_mklink=False):
+def make_symlink(target: Path, source: Path, use_mklink: bool=False):
     if use_mklink:
         cmd_path = os.popen("which cmd.exe").readline().strip()
         if len(cmd_path) > 0:
@@ -78,15 +78,13 @@ class Link:
         self.mklink_if_wsl = mklink_if_wsl
 
     def __iter__(self):
-        yield from [
-            self.target,
-            self.name,
-            self.platforms,
-            self.archs,
-            self.mklink_if_wsl,
-        ]
+        yield self.target
+        yield self.name
+        yield self.platforms
+        yield self.archs
+        yield self.mklink_if_wsl
 
-    def match(self, platform, arch):
+    def match(self, platform: str, arch: str):
         return ((self.platforms is None or platform in self.platforms)
                 and (self.archs is None or arch in self.archs))
 
