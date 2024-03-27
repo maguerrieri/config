@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
-from typing import List, Tuple, Union
-
-import sys
-import platform
-import os
 import argparse
-
+import os
+import platform
+import sys
 from pathlib import Path, PureWindowsPath
+from typing import List
 
 parser = argparse.ArgumentParser("Set up your symlinks")
 parser.add_argument("--cloud")
