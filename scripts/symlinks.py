@@ -22,49 +22,44 @@ class UnsupportedPlatformException(Exception):
 
 is_wsl = len(os.popen("which cmd.exe").readline().strip()) > 0
 
-def home_path() -> Path:
+def make_home_path() -> Path:
     return Path("~").expanduser()
-home_path = home_path()
+home_path = make_home_path()
 print(f"Home directory: {home_path}")
 
-def real_home_path() -> str:
+def make_real_home_path() -> Path:
     if not is_wsl:
         return home_path
 
-    wsl_path = os.popen("wslpath $(cmd.exe /C \"echo %USERPROFILE%\")").readline().strip()
-    if os.path.exists(wsl_path):
+    wsl_path = Path(os.popen("wslpath $(cmd.exe /C \"echo %USERPROFILE%\")").readline().strip()).resolve()
+    if wsl_path.exists():
         return wsl_path
     
     raise UnsupportedPlatformException()
-real_home_path = real_home_path()
+real_home_path = make_real_home_path()
 print(f"Platform home directory: {real_home_path}")
 
-def cloud_path() -> str:
-    macos_path = os.path.expandvars("$HOME/Library/Mobile Documents/com~apple~CloudDocs")
-    if os.path.exists(macos_path):
+def make_cloud_path() -> Path:
+    macos_path = Path("~").expanduser() / "Library" / "Mobile Documents" / "com~apple~CloudDocs"
+    if macos_path.exists():
         return macos_path
 
-    wsl_path = os.path.join(real_home_path, cloud)
+    wsl_path = real_home_path / cloud
     if os.path.exists(wsl_path):
         return wsl_path
     
     raise FileNotFoundError(f"Can't find cloud directory named {cloud}")
-cloud_path = cloud_path()
+cloud_path = make_cloud_path()
 print(f"Cloud path: {cloud_path}")
 
-wsl_root_path = "/mnt/c"
-def root_relative_wsl_path(path: str):
-    if path.startswith(wsl_root_path):
-        return path[len(wsl_root_path):]
-    else:
-        return path
+wsl_root_path = PureWindowsPath(Path("/mnt/c").resolve())
 
-def make_symlink(target: str, source: str, use_mklink=False):
+def make_symlink(target: Path, source: Path, use_mklink=False):
     if use_mklink:
         cmd_path = os.popen("which cmd.exe").readline().strip()
         if len(cmd_path) > 0:
-            win_source = "C:" / PureWindowsPath(root_relative_wsl_path(source))
-            win_target = "C:" / PureWindowsPath(root_relative_wsl_path(target))
+            win_source = "C:" / PureWindowsPath(source.relative_to(wsl_root_path))
+            win_target = "C:" / PureWindowsPath(target.relative_to(wsl_root_path))
 
             os.system(f"cmd.exe /C \"mklink {win_source} {win_target}\"")
             return
@@ -72,11 +67,11 @@ def make_symlink(target: str, source: str, use_mklink=False):
     os.symlink(target, source)
 
 class Link:
-    def __init__(self, 
-                 target: str,
-                 name: str, 
-                 platforms: List[str]=None, 
-                 archs: List[str]=None, 
+    def __init__(self,
+                 target: Path,
+                 name: Path,
+                 platforms: List[str] | None=None,
+                 archs: List[str] | None=None,
                  mklink_if_wsl: bool=False) -> None:
         self.target = target
         self.name = name
@@ -98,47 +93,48 @@ class Link:
                 and (self.archs is None or arch in self.archs))
 
 links = [
-    Link(f"{cloud_path}", f"$HOME/{shortcloud}"),
-    Link(f"{cloud_path}/tech", "$HOME/tech"),
-    Link(f"{cloud_path}/tech/config/profile/zshrc", "$HOME/.zshrc"),
-    Link(f"{cloud_path}/tech/config/profile/zprofile", "$HOME/.zprofile"),
-    Link(f"{cloud_path}/tech/config/profile/git", "$HOME/.gitconfig"),
-    Link(f"{cloud_path}/tech/config/profile/gitignore", "$HOME/.gitignore_global"),
+    Link(cloud_path, real_home_path / shortcloud),
+    Link(cloud_path / "tech", real_home_path / "tech"),
+    Link(cloud_path / "tech" / "config" / "profile" / "zshrc", real_home_path / ".zshrc"),
+    Link(cloud_path / "tech" / "config" / "profile" / "zprofile", real_home_path / ".zprofile"),
+    Link(cloud_path / "tech" / "config" / "profile" / "git", real_home_path / ".gitconfig"),
+    Link(cloud_path / "tech" / "config" / "profile" / "gitignore", real_home_path / ".gitignore_global"),
     Link(
-        f"{cloud_path}/tech/config/profile/windows-terminal.json",
-        f"{real_home_path}/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json",
-        ['wsl'], 
+        cloud_path / "tech" / "config" / "profile" / "windows-terminal.json",
+        real_home_path / "AppData" / "Local" / "Packages" / "Microsoft.WindowsTerminal_8wekyb3d8bbwe" / "LocalState"
+            / "settings.json",
+        ['wsl'],
         mklink_if_wsl=True
     ),
     Link(
-        f"{cloud_path}/tech/config/bin/ibrew",
-        f"{home_path}/.local/bin/ibrew",
+        cloud_path / "tech" / "config" / "bin" / "ibrew",
+        home_path / ".local" / "bin" / "ibrew",
         platforms=['darwin'],
         archs=['arm'],
     ),
     Link(
-        f"{cloud_path}/tech/config/bin/git-clear-hard",
-        f"{home_path}/.local/bin/git-cl",
+        cloud_path / "tech" / "config" / "bin" / "git-clear-hard",
+        home_path / ".local" / "bin" / "git-cl",
     ),
     Link(
-        f"{cloud_path}/tech/config/bin/git-clear",
-        f"{home_path}/.local/bin/git-clear",
+        cloud_path / "tech" / "config" / "bin" / "git-clear",
+        home_path / ".local" / "bin" / "git-clear",
     ),
     Link(
-        f"{cloud_path}/tech/config/bin/git-submodule-update",
-        f"{home_path}/.local/bin/git-smu",
+        cloud_path / "tech" / "config" / "bin" / "git-submodule-update",
+        home_path / ".local" / "bin" / "git-smu",
     ),
     Link(
-        f"{cloud_path}/tech/config/bin/git-iamme",
-        f"{home_path}/.local/bin/git-iamme",
+        cloud_path / "tech" / "config" / "bin" / "git-iamme",
+        home_path / ".local" / "bin" / "git-iamme",
     ),
     Link(
-        f"{cloud_path}/tech/config/bin/git-iampg",
-        f"{home_path}/.local/bin/git-iampg",
+        cloud_path / "tech" / "config" / "bin" / "git-iampg",
+        home_path / ".local" / "bin" / "git-iampg",
     ),
     Link(
-        f"{home_path}/Developer/androidsigning/keystores/debug_pg.keystore",
-        f"{home_path}/.android/debug.keystore",
+        home_path / "Developer" / "androidsigning" / "keystores" / "debug_pg.keystore",
+        home_path / ".android" / "debug.keystore",
     ),
 ]
 
@@ -146,20 +142,17 @@ for link in links:
     if not link.match("wsl" if is_wsl else sys.platform, platform.processor()):
         continue
 
-    expanded_target = os.path.expandvars(link.target).format(**locals())
-    expanded_name = os.path.expandvars(link.name).format(**locals())
-
-    if os.path.islink(expanded_name):
-        print(f"Deleting existing symlink `{expanded_name}`.")
-        os.unlink(expanded_name)
-    elif os.path.exists(expanded_name):
-        backup = os.path.join(os.path.dirname(expanded_name), f"_{os.path.basename(expanded_name)}")
-        print(f"Moving existing `{expanded_name}` to `{backup}`.")
-        if not os.path.exists(backup):
-            os.rename(expanded_name, backup)
+    if link.name.is_symlink():
+        print(f"Deleting existing symlink `{link.name}`.")
+        link.name.unlink()
+    elif link.name.exists():
+        backup = link.name.parent / f"_{link.name.name}"
+        print(f"Moving existing `{link.name}` to `{backup}`.")
+        if not backup.exists():
+            link.name.rename(backup)
         else:
             print(f"`{backup}` also exists; aborting.")
             sys.exit()
     
-    print(f"Linking `{expanded_name}` -> `{expanded_target}`.")
-    make_symlink(expanded_target, expanded_name, link.mklink_if_wsl)
+    print(f"Linking `{link.name}` -> `{link.target}`.")
+    make_symlink(link.target, link.name, link.mklink_if_wsl)
