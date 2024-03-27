@@ -61,8 +61,10 @@ def make_symlink(target: Path, source: Path, use_mklink: bool=False):
 
             os.system(f"cmd.exe /C \"mklink {win_source} {win_target}\"")
             return
-    
-    os.symlink(target, source)
+
+    if not source.parent.exists():
+        source.parent.mkdir(parents=True)
+    source.symlink_to(target)
 
 class Link:
     def __init__(self,
